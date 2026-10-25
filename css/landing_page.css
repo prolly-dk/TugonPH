@@ -1,0 +1,297 @@
+:root {
+  --main-blue: #0038a8;
+  --dark-blue: #0c1966;
+  --light-blue: #019cef;
+  --main-red: #ce1126;
+  --light-red: #f44556;
+  --dark-red: #680d0f;
+  --main-yellow: #fcd116;
+  --light-yellow: #eef94b;
+  --dark-yellow: #fda624;
+  --main-black: #111111;
+  --dark-grey: #363535;
+  --light-grey: #6b6b6b;
+  --main-white: #ffffff;
+  --black: #000000;
+
+  --text-title: 2.25rem;   /* 36px */
+  --text-subtitle: 1.75rem; /* 28px */
+  --text-header: 1.375rem; /* 22px */
+  --text-body: 1rem;       /* 16px */
+  --text-small: 0.75rem;   /* 12px */
+
+  --header-height: 6.25rem;
+
+  /* Parallax: Panel 1 sits --parallax-depth px closer to the viewer */
+  --perspective: 1000;
+  --parallax-depth: 300;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--main-white);
+  font-family: 'Roboto', sans-serif;
+  font-size: var(--text-body);
+  line-height: normal;
+  color: var(--black);
+}
+
+p, h1, h2 { margin: 0; }
+
+/* The page scrolls inside this container so its perspective drives the parallax.
+   The origin sits at the header's bottom-left so Panel 1 lines up exactly at rest. */
+.parallax {
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  perspective: calc(var(--perspective) * 1px);
+  perspective-origin: 0 var(--header-height);
+}
+.parallax main { transform-style: preserve-3d; }
+a { color: inherit; text-decoration: none; }
+img { display: block; }
+
+/* ---------- Shared: red button ---------- */
+.red-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-weight: 700;
+  color: var(--main-white);
+}
+.red-button--sm { width: 8.4375rem; height: 2.5rem; }
+.red-button--lg { width: 10.625rem; height: 3.125rem; }
+/* The SVG box carries 12px of drop-shadow room on every side around a centered shape,
+   so it is sized explicitly and centered on the button rather than left to each
+   browser's intrinsic SVG sizing */
+.red-button__box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  max-width: none;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.red-button--sm .red-button__box { width: 8.9449rem; height: 4rem; }     /* 143.118 × 64 */
+.red-button--lg .red-button__box { width: 10.875rem; height: 4.625rem; } /* 174 × 74 */
+.red-button__label { position: relative; }
+
+/* Hover and Pressed artwork from the Figma Red Button set is stacked over the default
+   box and revealed per state. The small variants pair the small box shape with the
+   large set's state effects, since Figma only defines the states at 170 × 50. */
+.red-button__box--hover,
+.red-button__box--pressed { visibility: hidden; }
+.red-button:hover .red-button__box--hover,
+.red-button:focus-visible .red-button__box--hover,
+.red-button:active .red-button__box--pressed { visibility: visible; }
+
+/* Cropped image slot: the image is positioned inside a clipping box */
+.crop { position: relative; flex-shrink: 0; overflow: hidden; }
+.crop img { position: absolute; max-width: none; }
+
+/* ---------- Header ---------- */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--header-height);
+  padding: 0.9375rem;
+  overflow: clip;
+  background: linear-gradient(to right, var(--light-blue) 0%, var(--main-blue) 63.989%, var(--dark-blue) 99.519%);
+}
+.header__logos { display: flex; align-items: center; }
+.logo-icon { width: 4.6875rem; height: 4.6875rem; }
+.logo-icon img { width: 222.22%; height: 222.22%; left: -60.11%; top: -42.83%; }
+.logo-text { width: 11.25rem; height: 2.8125rem; }
+.logo-text img { width: 166.67%; height: 666.67%; left: -33.89%; top: -426.67%; }
+
+.header__nav, .header__account { display: flex; align-items: center; gap: 1.875rem; }
+.text-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4.25rem;
+  height: 2.4375rem;
+  padding: 0.625rem;
+  color: var(--main-white);
+  white-space: nowrap;
+}
+.text-button:hover,
+.text-button:focus-visible,
+.text-button:active {
+  text-decoration: underline from-font;
+  text-underline-position: from-font;
+}
+.text-button:active {
+  text-decoration-skip-ink: none;
+  background: rgba(255, 255, 255, 0.05);
+}
+.text-button--bold { font-weight: 700; }
+
+/* ---------- Panel 1 (hero) ---------- */
+.panel-1 {
+  position: relative;
+  z-index: 10;
+  /* Moving closer magnifies by P / (P - depth); scaling by the inverse keeps its size at rest,
+     so it only shows up as Panel 1 scrolling away faster than the rest of the page */
+  transform: translateZ(calc(var(--parallax-depth) * 1px))
+             scale(calc(1 - var(--parallax-depth) / var(--perspective)));
+  transform-origin: 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - var(--header-height));
+  border-bottom: 0.3125rem solid var(--dark-blue);
+  overflow: hidden;
+  /* The gradient and photo layers are translucent; this opaque base stops the
+     services section tucked underneath from showing through */
+  background: var(--main-white);
+}
+.panel-1::before,
+.panel-1::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.panel-1::before {
+  background: linear-gradient(to bottom, rgba(206, 17, 38, 0.25), rgba(0, 56, 168, 0.25) 99.99%);
+}
+.panel-1::after {
+  opacity: 0.2;
+  background: url('../assets/Backgrounds/panel1-bg.jpg') 86.6% 50.7% / 184.97% auto no-repeat;
+}
+.panel-1__logo { position: relative; z-index: 1; width: 18.75rem; height: 18.75rem; object-fit: cover; }
+
+/* ---------- Services ---------- */
+.services {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3.125rem;
+  /* Panel 1 outruns the page by depth / P of the screen height before it leaves, so pull
+     this section up by that much: it starts tucked under Panel 1 and is revealed as the
+     panel scrolls away, leaving the original 5rem gap once the panel is gone */
+  margin: calc(5rem - 100vh * var(--parallax-depth) / var(--perspective)) 0 6.25rem;
+  color: var(--dark-blue);
+  text-align: center;
+}
+.services__title { font-size: var(--text-title); font-weight: 800; }
+.services__cards {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 25rem;
+  padding: 0 3.125rem;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.875rem;
+  height: 100%;
+  padding: 1.5625rem;
+  border-top: 0.1875rem solid var(--main-blue);
+  border-bottom: 0.1875rem solid var(--main-blue);
+  border-radius: 1.25rem;
+  color: var(--black);
+}
+.card__icon { width: 6.25rem; height: 6.25rem; }
+.card__title { font-size: var(--text-header); font-weight: 500; white-space: nowrap; }
+.card__body { width: 18.75rem; text-align: left; }
+
+.icon-service-lists img { width: 100%; height: 58.79%; left: 0; top: 20.61%; }
+.icon-document-request img { width: 77%; height: 77%; left: 11.97%; top: 11.22%; }
+.icon-report-issues img { width: 74.94%; height: 76.63%; left: 12.41%; top: 12.09%; }
+.icon-data-privacy img { width: 133%; height: 133%; left: -16.95%; top: -16.43%; }
+
+/* ---------- Sign-up + data privacy ---------- */
+.signup {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 43.75rem;
+  padding: 6.25rem 3.125rem;
+  background: linear-gradient(to bottom, var(--main-blue), var(--dark-blue));
+  color: var(--main-white);
+}
+.steps {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5625rem;
+  width: 37.5rem;
+}
+.steps__title { font-size: var(--text-title); font-weight: 800; white-space: nowrap; }
+.step {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+/* The numeral SVG includes its drop shadow and overflows the 75px slot. Its size is set
+   explicitly (83 × 83) so it scales with rem instead of each browser's intrinsic SVG size */
+.step__numeral { position: relative; flex-shrink: 0; width: 4.6875rem; height: 4.6875rem; }
+.step__numeral img { position: absolute; top: 0; left: 0; width: 5.1875rem; height: 5.1875rem; max-width: none; }
+.step__text { font-size: var(--text-header); line-height: 3.25rem; white-space: nowrap; }
+.steps__button { display: flex; justify-content: center; width: 100%; height: 3.125rem; }
+
+.privacy-card {
+  width: 34.375rem;
+  border-color: var(--main-yellow);
+  color: var(--main-white);
+  text-align: center;
+}
+.privacy-card .card__title { font-size: var(--text-title); font-weight: 800; }
+.privacy-card .card__body { width: 100%; font-size: var(--text-header); font-weight: 300; text-align: center; }
+
+/* ---------- Footer ---------- */
+.footer {
+  display: flex;
+  align-items: center;
+  height: 12.5rem;
+  padding: 3.125rem 4.6875rem 0.9375rem 1.5625rem;
+  background: var(--main-white);
+  border-top: 0.25rem solid var(--dark-red);
+}
+/* Takes all the space left of the link columns and centers the logo in it; the right
+   padding mirrors the footer's left padding so the logo sits midway between the page
+   edge and the first column's divider at any width */
+.footer__brand {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding-right: 1.5625rem;
+}
+.footer__logo { width: 9.375rem; height: 9.375rem; }
+.footer__logo img { width: 134.6%; height: 134.6%; left: -17.58%; top: -22.52%; }
+.footer__links { display: flex; align-items: center; gap: 16.5rem; height: 100%; }
+.footer__column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.9375rem;
+  height: 100%;
+  padding: 0 0.9375rem;
+  border-left: 0.125rem solid var(--dark-blue);
+  font-size: var(--text-small);
+  white-space: nowrap;
+}
+.footer__column:first-child { padding: 0 1.25rem; }
+.footer__column a:hover { text-decoration: underline; }
+.footer__socials { justify-content: center; }
+.social { display: flex; align-items: center; gap: 0.9375rem; }
+.social img { flex-shrink: 0; width: 1.25rem; height: 1.25rem; } /* 20 × 20 */
+
+@media (prefers-reduced-motion: reduce) {
+  .parallax { perspective: none; }
+  .panel-1 { transform: none; }
+  .services { margin-top: 5rem; }
+}
