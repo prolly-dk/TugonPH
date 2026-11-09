@@ -12,16 +12,33 @@
 <body>
 <div class="parallax">
   <header class="header">
-    <a class="header__logos" href="#" aria-label="TugonPH home">
-      <div class="crop logo-icon"><img src="assets/Logo/tugon-logo-full.png" alt=""></div>
-      <div class="crop logo-text"><img src="assets/Logo/tugon-logo-full.png" alt=""></div>
+    <a class="header__logos" href="#" aria-label="Tugon home">
+      <div class="crop logo-icon"><img src="assets/Logo/tugon-logo-sheet.png" alt=""></div>
+      <div class="crop logo-text"><img src="assets/Logo/tugon-logo-sheet.png" alt=""></div>
     </a>
-    <nav class="header__nav">
+
+    <!-- Desktop navigation -->
+    <nav class="header__nav" aria-label="Main">
       <a class="text-button" href="#">Home</a>
       <a class="text-button" href="#">Report</a>
       <a class="text-button" href="#">News</a>
     </nav>
-    <div class="header__account">
+
+    <!-- Mobile navigation: the same links behind the "Services" dropdown -->
+    <details class="header__menu">
+      <summary class="text-button header__menu-toggle">
+        Services
+        <img class="header__menu-arrow" src="assets/Icons/icon-dropdown.svg" alt="">
+      </summary>
+      <nav class="header__menu-list" aria-label="Main">
+        <a class="text-button" href="#">News</a>
+        <a class="text-button" href="#">Document</a>
+        <a class="text-button" href="#">Report</a>
+      </nav>
+    </details>
+
+    <!-- Desktop account controls -->
+    <div class="header__account header__account--desktop">
       <a class="text-button text-button--bold" href="#">Sign-Up</a>
       <a class="red-button red-button--sm" href="#">
         <img class="red-button__box" src="assets/Buttons/button-box-sm.svg" alt="">
@@ -30,11 +47,22 @@
         <span class="red-button__label">Log-In</span>
       </a>
     </div>
+
+    <!-- Mobile account controls: the mobile design swaps which action is the button -->
+    <div class="header__account header__account--mobile">
+      <a class="text-button text-button--bold" href="#">Log in</a>
+      <a class="red-button red-button--sm" href="#">
+        <img class="red-button__box" src="assets/Buttons/button-box-sm.svg" alt="">
+        <img class="red-button__box red-button__box--hover" src="assets/Buttons/red-button-sm-hover.svg" alt="">
+        <img class="red-button__box red-button__box--pressed" src="assets/Buttons/red-button-sm-pressed.svg" alt="">
+        <span class="red-button__label">Sign Up</span>
+      </a>
+    </div>
   </header>
 
   <main>
     <section class="panel-1">
-      <img class="panel-1__logo" src="assets/Logo/tugon-logo-full.png" alt="TugonPH – Barangay Online Service Desk">
+      <img class="panel-1__logo" src="assets/Logo/tugon-logo-full.png" alt="Tugon – Barangay Manuyo Tres Online Service Desk">
     </section>
 
     <section class="services">
@@ -45,9 +73,9 @@
       </div>
       <div class="services__cards">
         <article class="card">
-          <div class="crop card__icon icon-service-lists"><img src="assets/Icons/icon-service-lists.png" alt=""></div>
-          <h2 class="card__title">Service Lists</h2>
-          <p class="card__body">TugonPH delivers complete lists of available services that the barangay hall offer, whether may it be on-site or online</p>
+          <div class="crop card__icon icon-latest-news"><img src="assets/Icons/icon-latest-news.png" alt=""></div>
+          <h2 class="card__title">Latest News</h2>
+          <p class="card__body">TugonPH delivers up-to-date news regarding what is currently happening in the barangay</p>
         </article>
         <article class="card">
           <div class="crop card__icon icon-document-request"><img src="assets/Icons/icon-document-request.png" alt=""></div>
@@ -97,14 +125,14 @@
 
   <footer class="footer">
     <div class="footer__brand">
-      <div class="crop footer__logo"><img src="assets/Logo/tugon-logo-full.png" alt="TugonPH"></div>
+      <div class="crop footer__logo"><img src="assets/Logo/tugon-logo-full.png" alt="Tugon – Barangay Manuyo Tres Online Service Desk"></div>
     </div>
     <div class="footer__links">
       <div class="footer__column">
         <a href="#">About Us</a>
         <a href="#">Contact Us</a>
       </div>
-      <div class="footer__column">
+      <div class="footer__column footer__column--pages">
         <a href="#">Document Request</a>
         <a href="#">Services</a>
         <a href="#">Report Issues</a>

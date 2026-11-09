@@ -14,17 +14,17 @@
   --main-white: #ffffff;
   --black: #000000;
 
-  --text-title: 2.25rem;   /* 36px */
-  --text-subtitle: 1.75rem; /* 28px */
-  --text-header: 1.375rem; /* 22px */
-  --text-body: 1rem;       /* 16px */
-  --text-small: 0.75rem;   /* 12px */
+  --text-title: 2.25rem;    /* Title */
+  --text-subtitle: 1.75rem; /* Subtitle */
+  --text-header: 1.375rem;  /* Header */
+  --text-body: 1rem;        /* Body */
+  --text-small: 0.75rem;    /* Small Text */
 
   --header-height: 6.25rem;
 
-  /* Parallax: Panel 1 sits --parallax-depth px closer to the viewer */
-  --perspective: 1000;
-  --parallax-depth: 300;
+  /* Parallax, in rem: Panel 1 sits --parallax-depth closer to the viewer than the page */
+  --perspective: 62.5;
+  --parallax-depth: 18.75;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -46,7 +46,7 @@ p, h1, h2 { margin: 0; }
   height: 100vh;
   overflow-x: hidden;
   overflow-y: auto;
-  perspective: calc(var(--perspective) * 1px);
+  perspective: calc(var(--perspective) * 1rem);
   perspective-origin: 0 var(--header-height);
 }
 .parallax main { transform-style: preserve-3d; }
@@ -65,7 +65,7 @@ img { display: block; }
 }
 .red-button--sm { width: 8.4375rem; height: 2.5rem; }
 .red-button--lg { width: 10.625rem; height: 3.125rem; }
-/* The SVG box carries 12px of drop-shadow room on every side around a centered shape,
+/* The SVG box carries 0.75rem of drop-shadow room on every side around a centered shape,
    so it is sized explicitly and centered on the button rather than left to each
    browser's intrinsic SVG sizing */
 .red-button__box {
@@ -76,17 +76,20 @@ img { display: block; }
   transform: translate(-50%, -50%);
   pointer-events: none;
 }
-.red-button--sm .red-button__box { width: 8.9449rem; height: 4rem; }     /* 143.118 × 64 */
-.red-button--lg .red-button__box { width: 10.875rem; height: 4.625rem; } /* 174 × 74 */
+.red-button--sm .red-button__box { width: 8.9449rem; height: 4rem; }     /* Figma 143.118 × 64 */
+.red-button--lg .red-button__box { width: 10.875rem; height: 4.625rem; } /* Figma 174 × 74 */
 .red-button__label { position: relative; }
 
-/* Hover and Pressed artwork from the Figma Red Button set is stacked over the default
-   box and revealed per state. The small variants pair the small box shape with the
-   large set's state effects, since Figma only defines the states at 170 × 50. */
+/* Default, Hover and Pressed artwork from the Figma Red Button set are stacked and only
+   the current state's layer is shown. Each SVG carries its own translucent glow, so
+   showing more than one at a time stacks the glows far brighter than the design.
+   The small variants pair the small box shape with the large set's state effects,
+   since Figma only defines the states at 170 × 50. */
 .red-button__box--hover,
-.red-button__box--pressed { visibility: hidden; }
-.red-button:hover .red-button__box--hover,
-.red-button:focus-visible .red-button__box--hover,
+.red-button__box--pressed,
+.red-button:is(:hover, :focus-visible, :active) .red-button__box { visibility: hidden; }
+.red-button:is(:hover, :focus-visible) .red-button__box--hover { visibility: visible; }
+.red-button:active .red-button__box--hover { visibility: hidden; }
 .red-button:active .red-button__box--pressed { visibility: visible; }
 
 /* Cropped image slot: the image is positioned inside a clipping box */
@@ -105,9 +108,11 @@ img { display: block; }
 }
 .header__logos { display: flex; align-items: center; }
 .logo-icon { width: 4.6875rem; height: 4.6875rem; }
-.logo-icon img { width: 222.22%; height: 222.22%; left: -60.11%; top: -42.83%; }
-.logo-text { width: 11.25rem; height: 2.8125rem; }
-.logo-text img { width: 166.67%; height: 666.67%; left: -33.89%; top: -426.67%; }
+.logo-icon img { width: 222.22%; height: 222.22%; left: -60.11%; top: -32.8%; }
+/* Figma lets the wordmark's crop window spill 11.11% above and 24.44% below its slot so
+   all three lines of the wordmark show; the negative margins keep the slot's layout height */
+.logo-text { width: 11.25rem; height: 3.8125rem; margin: -0.3125rem 0 -0.6875rem; }
+.logo-text img { width: 166.67%; height: 491.8%; left: -33.89%; top: -306.56%; }
 
 .header__nav, .header__account { display: flex; align-items: center; gap: 1.875rem; }
 .text-button {
@@ -132,13 +137,38 @@ img { display: block; }
 }
 .text-button--bold { font-weight: 700; }
 
+/* Mobile-only "Services" dropdown; hidden on desktop until the breakpoint */
+.header__menu { position: relative; }
+.header__menu-toggle {
+  width: auto;
+  gap: 0.25rem;
+  padding-right: 0;
+  cursor: pointer;
+  list-style: none;
+}
+.header__menu-toggle::-webkit-details-marker { display: none; }
+.header__menu-arrow { width: 1.5rem; height: 1.5rem; transition: transform 0.2s; }
+.header__menu[open] .header__menu-arrow { transform: rotate(180deg); }
+.header__menu-list {
+  position: absolute;
+  top: calc(100% + 1.125rem);
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  min-width: 8rem;
+  padding: 0.5rem;
+  background: var(--dark-blue);
+  border-radius: 0 0 0.625rem 0.625rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.25);
+  transform: translateX(-50%);
+}
+.header__menu-list .text-button { width: 100%; justify-content: flex-start; }
+
 /* ---------- Panel 1 (hero) ---------- */
 .panel-1 {
   position: relative;
   z-index: 10;
-  /* Moving closer magnifies by P / (P - depth); scaling by the inverse keeps its size at rest,
-     so it only shows up as Panel 1 scrolling away faster than the rest of the page */
-  transform: translateZ(calc(var(--parallax-depth) * 1px))
+  transform: translateZ(calc(var(--parallax-depth) * 1rem))
              scale(calc(1 - var(--parallax-depth) / var(--perspective)));
   transform-origin: 0 0;
   display: flex;
@@ -147,8 +177,6 @@ img { display: block; }
   height: calc(100vh - var(--header-height));
   border-bottom: 0.3125rem solid var(--dark-blue);
   overflow: hidden;
-  /* The gradient and photo layers are translucent; this opaque base stops the
-     services section tucked underneath from showing through */
   background: var(--main-white);
 }
 .panel-1::before,
@@ -173,9 +201,6 @@ img { display: block; }
   flex-direction: column;
   align-items: center;
   gap: 3.125rem;
-  /* Panel 1 outruns the page by depth / P of the screen height before it leaves, so pull
-     this section up by that much: it starts tucked under Panel 1 and is revealed as the
-     panel scrolls away, leaving the original 5rem gap once the panel is gone */
   margin: calc(5rem - 100vh * var(--parallax-depth) / var(--perspective)) 0 6.25rem;
   color: var(--dark-blue);
   text-align: center;
@@ -207,7 +232,7 @@ img { display: block; }
 .card__title { font-size: var(--text-header); font-weight: 500; white-space: nowrap; }
 .card__body { width: 18.75rem; text-align: left; }
 
-.icon-service-lists img { width: 100%; height: 58.79%; left: 0; top: 20.61%; }
+.icon-latest-news img { width: 100%; height: 100%; left: 0; top: 0; }
 .icon-document-request img { width: 77%; height: 77%; left: 11.97%; top: 11.22%; }
 .icon-report-issues img { width: 74.94%; height: 76.63%; left: 12.41%; top: 12.09%; }
 .icon-data-privacy img { width: 133%; height: 133%; left: -16.95%; top: -16.43%; }
@@ -236,8 +261,8 @@ img { display: block; }
   justify-content: space-between;
   width: 100%;
 }
-/* The numeral SVG includes its drop shadow and overflows the 75px slot. Its size is set
-   explicitly (83 × 83) so it scales with rem instead of each browser's intrinsic SVG size */
+/* The numeral SVG includes its drop shadow and overflows the 4.6875rem slot. Its size is set
+   explicitly (Figma 83 × 83) so it scales with rem instead of each browser's intrinsic SVG size */
 .step__numeral { position: relative; flex-shrink: 0; width: 4.6875rem; height: 4.6875rem; }
 .step__numeral img { position: absolute; top: 0; left: 0; width: 5.1875rem; height: 5.1875rem; max-width: none; }
 .step__text { font-size: var(--text-header); line-height: 3.25rem; white-space: nowrap; }
@@ -288,10 +313,111 @@ img { display: block; }
 .footer__column a:hover { text-decoration: underline; }
 .footer__socials { justify-content: center; }
 .social { display: flex; align-items: center; gap: 0.9375rem; }
-.social img { flex-shrink: 0; width: 1.25rem; height: 1.25rem; } /* 20 × 20 */
+.social img { flex-shrink: 0; width: 1.25rem; height: 1.25rem; } /* Figma 20 × 20 */
+
+/* Mobile-only pieces, revealed by the mobile breakpoint below */
+.header__menu,
+.header__account--mobile { display: none; }
 
 @media (prefers-reduced-motion: reduce) {
   .parallax { perspective: none; }
   .panel-1 { transform: none; }
   .services { margin-top: 5rem; }
+}
+
+/* ---------- Mobile: Landing Page- Mobile (Figma 412 wide) ---------- */
+@media (max-width: 48rem) {
+  :root { --header-height: 4.6875rem; }
+
+  /* No parallax on touch screens: the window scrolls normally, and the services
+     section follows the hero instead of tucking under it */
+  .parallax {
+    height: auto;
+    overflow: visible;
+    overflow-x: clip;
+    perspective: none;
+  }
+
+  /* Header: icon only, "Services" dropdown, and Log in / Sign Up */
+  .header {
+    position: relative;
+    z-index: 20;
+    gap: 0.25rem;
+    overflow: visible;
+  }
+  .header__nav,
+  .header__account--desktop,
+  .logo-text { display: none; }
+  .header__menu { display: block; }
+  .header__account--mobile { display: flex; gap: 0; }
+  .header .text-button { width: auto; }
+  /* The icon may shrink a little so the header still fits phones narrower than the design */
+  .header__logos { flex: 0 1 4.6875rem; min-width: 3.5rem; }
+  .logo-icon { flex-shrink: 1; width: 100%; height: auto; aspect-ratio: 1; }
+
+  /* Hero: gradient under a 20% white wash, no photo */
+  .panel-1 {
+    transform: none;
+    height: calc(100vh - var(--header-height));
+    height: calc(100svh - var(--header-height));
+  }
+  .panel-1::after { opacity: 1; background: rgba(255, 255, 255, 0.2); }
+
+  /* Services: one column of cards */
+  .services {
+    gap: 1.5625rem;
+    margin: 0;
+    padding: 0.875rem 1.25rem;
+  }
+  .services__cards {
+    flex-direction: column;
+    gap: 0.625rem;
+    height: auto;
+    padding: 0;
+  }
+  /* Figma fixes the cards at 266.667 tall, which clips the longer descriptions; this
+     keeps that as the minimum and lets a card grow to fit its text */
+  .services .card {
+    width: min(21.875rem, 100%);
+    height: auto;
+    min-height: 16.6667rem;
+  }
+  .services .card__body { width: 100%; }
+
+  /* Sign-up: steps only, the data privacy card is hidden in the mobile design */
+  .signup {
+    justify-content: center;
+    height: auto;
+    min-height: 43.75rem;
+    padding: 3.125rem 0.625rem;
+  }
+  .steps { width: 100%; }
+  .steps__title { font-size: var(--text-header); font-weight: 700; }
+  .step { justify-content: flex-start; gap: 0.9375rem; }
+  .step__text {
+    flex: 1;
+    font-size: var(--text-body);
+    line-height: normal;
+    white-space: normal;
+  }
+  .privacy-card { display: none; }
+
+  /* Footer: logo plus the About and Socials columns */
+  .footer {
+    justify-content: space-between;
+    padding: 1.5625rem 0.3125rem;
+  }
+  .footer__brand { flex: 0 1 auto; min-width: 0; padding-right: 0; }
+  .footer__logo { flex-shrink: 1; max-width: 100%; height: auto; aspect-ratio: 1; }
+  .footer__links { flex-shrink: 0; gap: 0; }
+  .footer__column--pages { display: none; }
+}
+
+/* Phones narrower than the 412-wide design: tighten the header's spacing so the
+   Sign Up button stays on screen */
+@media (max-width: 25rem) {
+  .header { padding-inline: 0.625rem; }
+  .header .text-button { padding-inline: 0.375rem; }
+  .header__menu-toggle { gap: 0; padding-right: 0; }
+  .header__logos { min-width: 3rem; }
 }
