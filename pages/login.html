@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Log In – Tugon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/account_pages.css">
+</head>
+<body>
+  <main class="auth">
+    <a class="auth__logo" href="../index.html" aria-label="Tugon home">
+      <div class="crop logo-text"><img src="../assets/Logo/tugon-logo-sheet.png" alt=""></div>
+    </a>
+
+    <form class="auth-box auth-box--login" aria-labelledby="login-title">
+      <h1 class="auth-title" id="login-title">Log In</h1>
+
+      <div class="auth-fields">
+        <div class="auth-field">
+          <label for="login-id">E-mail or Phone Number</label>
+          <input class="auth-input" id="login-id" name="login" type="text" autocomplete="username">
+        </div>
+        <div class="auth-field">
+          <label for="login-password">Password</label>
+          <input class="auth-input" id="login-password" name="password" type="password" autocomplete="current-password">
+        </div>
+        <a class="auth-forgot" href="#">Forgot Password?</a>
+      </div>
+
+      <div class="auth-actions">
+        <button class="blue-button" type="button">
+          <picture>
+            <source media="(max-width: 48rem)" srcset="../assets/Buttons/blue-button-box-mobile.svg">
+            <img class="blue-button__box" src="../assets/Buttons/blue-button-box.svg" alt="">
+          </picture>
+          <span class="blue-button__label">Log In</span>
+        </button>
+        <a class="text-link text-link--blue" href="signup.html">Create Account</a>
+      </div>
+    </form>
+  </main>
+</body>
+</html>

@@ -19,28 +19,28 @@
 
     <!-- Desktop navigation -->
     <nav class="header__nav" aria-label="Main">
-      <a class="text-button" href="#">Home</a>
-      <a class="text-button" href="#">Report</a>
-      <a class="text-button" href="#">News</a>
+      <a class="text-button" href="pages/login.html">News</a>
+      <a class="text-button" href="pages/login.html">Documents</a>
+      <a class="text-button" href="pages/login.html">Report</a>
     </nav>
 
-    <!-- Mobile navigation: the same links behind the "Services" dropdown -->
+    <!-- Mobile navigation -->
     <details class="header__menu">
       <summary class="text-button header__menu-toggle">
         Services
         <img class="header__menu-arrow" src="assets/Icons/icon-dropdown.svg" alt="">
       </summary>
       <nav class="header__menu-list" aria-label="Main">
-        <a class="text-button" href="#">News</a>
-        <a class="text-button" href="#">Document</a>
-        <a class="text-button" href="#">Report</a>
+        <a class="text-button" href="pages/login.html">News</a>
+        <a class="text-button" href="pages/login.html">Document</a>
+        <a class="text-button" href="pages/login.html">Report</a>
       </nav>
     </details>
 
-    <!-- Desktop account controls -->
-    <div class="header__account header__account--desktop">
-      <a class="text-button text-button--bold" href="#">Sign-Up</a>
-      <a class="red-button red-button--sm" href="#">
+    <!-- Account controls -->
+    <div class="header__account">
+      <a class="text-button text-button--bold" href="pages/signup.html">Sign-Up</a>
+      <a class="red-button red-button--sm" href="pages/login.html">
         <img class="red-button__box" src="assets/Buttons/button-box-sm.svg" alt="">
         <img class="red-button__box red-button__box--hover" src="assets/Buttons/red-button-sm-hover.svg" alt="">
         <img class="red-button__box red-button__box--pressed" src="assets/Buttons/red-button-sm-pressed.svg" alt="">
@@ -72,17 +72,17 @@
         <p>No need to wait for long queues and deal with the hassle of commuting</p>
       </div>
       <div class="services__cards">
-        <article class="card">
+        <article class="card" id="latest-news">
           <div class="crop card__icon icon-latest-news"><img src="assets/Icons/icon-latest-news.png" alt=""></div>
           <h2 class="card__title">Latest News</h2>
           <p class="card__body">TugonPH delivers up-to-date news regarding what is currently happening in the barangay</p>
         </article>
-        <article class="card">
+        <article class="card" id="document-request">
           <div class="crop card__icon icon-document-request"><img src="assets/Icons/icon-document-request.png" alt=""></div>
           <h2 class="card__title">Document Request</h2>
           <p class="card__body">TugonPH provides a system to request various documents from the respective barangay</p>
         </article>
-        <article class="card">
+        <article class="card" id="report-issues">
           <div class="crop card__icon icon-report-issues"><img src="assets/Icons/icon-report-issues.png" alt=""></div>
           <h2 class="card__title">Report Issues</h2>
           <p class="card__body">TugonPH allows users to report issues within their barangay via ticketing system. Which tracks whether the issue has reached the admins or solved</p>
@@ -106,7 +106,7 @@
           <p class="step__text">And enjoy your seamless Barangay Service!</p>
         </div>
         <div class="steps__button">
-          <a class="red-button red-button--lg" href="#">
+          <a class="red-button red-button--lg" href="pages/signup.html">
             <img class="red-button__box" src="assets/Buttons/button-box-lg.svg" alt="">
             <img class="red-button__box red-button__box--hover" src="assets/Buttons/red-button-hover.svg" alt="">
             <img class="red-button__box red-button__box--pressed" src="assets/Buttons/red-button-pressed.svg" alt="">
