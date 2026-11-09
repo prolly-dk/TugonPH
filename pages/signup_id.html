@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up – Tugon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/account_pages.css">
+</head>
+<body>
+  <main class="auth">
+    <a class="auth__logo" href="../index.html" aria-label="Tugon home">
+      <div class="crop logo-text"><img src="../assets/Logo/tugon-logo-sheet.png" alt=""></div>
+    </a>
+
+    <!-- Sign up, step 2  -->
+    <form class="auth-box auth-box--signup auth-box--step-2" aria-labelledby="signup-title">
+      <div class="auth-heading auth-heading--spaced">
+        <h1 class="auth-title" id="signup-title">Sign Up</h1>
+        <p class="auth-subtitle">Barangay ID Credentials</p>
+      </div>
+
+      <div class="auth-fields">
+        <div class="auth-field">
+          <label for="signup-first-name">First Name</label>
+          <input class="auth-input" id="signup-first-name" name="first_name" type="text" autocomplete="given-name">
+        </div>
+        <div class="auth-field">
+          <label for="signup-middle-name">Middle Name</label>
+          <input class="auth-input" id="signup-middle-name" name="middle_name" type="text" autocomplete="additional-name">
+        </div>
+        <div class="auth-field">
+          <label for="signup-last-name">Last Name</label>
+          <input class="auth-input" id="signup-last-name" name="last_name" type="text" autocomplete="family-name">
+        </div>
+        <div class="auth-field">
+          <label for="signup-id-number">ID No.</label>
+          <input class="auth-input" id="signup-id-number" name="barangay_id" type="text" autocomplete="off">
+        </div>
+      </div>
+
+      <div class="auth-actions">
+        <a class="blue-button" href="signup_finished.html">
+          <picture>
+            <source media="(max-width: 48rem)" srcset="../assets/Buttons/blue-button-box-mobile.svg">
+            <img class="blue-button__box" src="../assets/Buttons/blue-button-box.svg" alt="">
+          </picture>
+          <span class="blue-button__label">Next</span>
+        </a>
+        <a class="text-link text-link--red" href="signup.html">Back</a>
+      </div>
+    </form>
+  </main>
+</body>
+</html>
