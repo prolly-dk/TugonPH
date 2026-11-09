@@ -151,33 +151,6 @@ img { display: block; }
 }
 .header__menu-list .text-button { width: 100%; justify-content: flex-start; }
 
-/* Mobile-only "Services" dropdown; hidden on desktop until the breakpoint */
-.header__menu { position: relative; }
-.header__menu-toggle {
-  width: auto;
-  gap: 0.25rem;
-  padding-right: 0;
-  cursor: pointer;
-  list-style: none;
-}
-.header__menu-toggle::-webkit-details-marker { display: none; }
-.header__menu-arrow { width: 1.5rem; height: 1.5rem; transition: transform 0.2s; }
-.header__menu[open] .header__menu-arrow { transform: rotate(180deg); }
-.header__menu-list {
-  position: absolute;
-  top: calc(100% + 1.125rem);
-  left: 50%;
-  display: flex;
-  flex-direction: column;
-  min-width: 8rem;
-  padding: 0.5rem;
-  background: var(--dark-blue);
-  border-radius: 0 0 0.625rem 0.625rem;
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.25);
-  transform: translateX(-50%);
-}
-.header__menu-list .text-button { width: 100%; justify-content: flex-start; }
-
 /* ---------- Panel 1 (hero) ---------- */
 .panel-1 {
   position: relative;
